@@ -78,7 +78,7 @@ def new_instance():
         count += elem[7]
     count = count / i
     line += str(int(count))+","
-    if int(count) > 3395:
+    if int(count/5) > 3395:
         line += "1\n"
     else:
         line += "0\n"

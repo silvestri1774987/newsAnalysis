@@ -11,7 +11,7 @@ def action():
 
     frequency_of=["argument", "day","numWords","numMedia"]
     
-    for elem in frequency_of:
+    for elem in frequency_of:#Make a frequency table in order to know how many tuple we have when we mouseout on the stackbar
         table=pd.crosstab(index=data[elem], columns=data["successful"])
         table.columns=["0", "1"]
         table.to_csv("static/"+elem+"_instances.csv")

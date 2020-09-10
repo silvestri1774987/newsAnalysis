@@ -12,7 +12,7 @@ def action():
 
 
 
-    for elem in frequency_of:
+    for elem in frequency_of:#group by with the value of argument/day/ecc... for the rows and succesfull for the columns(0 and 1), with normalize=index we normlaize for each row
         table=pd.crosstab(index=data[elem], columns=data["successful"], normalize="index")
         table.columns=["1", "0"]
         #swap 2 and 1

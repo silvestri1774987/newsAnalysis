@@ -85,7 +85,7 @@ def action(): # pulisci un po il dataset original
             if float(args[7].strip())+float(args[9].strip())+float(args[10].strip()) >= 60:
                 string+='4,' #stackbar argument
             string+=args[60].strip()+","
-            if(int(args[60].strip()) > count):# 1  popular
+            if(int(args[60].strip()) > count):# 1  popular value of the share is > of the vaerage of the success of all the dataset
                 string+="1"
             else:
                 string+='0'#0 unpopular
