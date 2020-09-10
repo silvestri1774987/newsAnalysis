@@ -18,13 +18,13 @@ function parallel() {
 		.append("g")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-	d3v3.csv("dataset.csv", function (error, articles) {
+	d3v3.csv("pca.csv", function (error, articles) {
 
 		// Extract the list of dimensions and create a scale for each.
 		//console.log(articles[0])
 		x.domain(dimensions = d3v3.keys(articles[0]).filter(function (d) {
 
-			return d != "url" && d != "numWords" && d != "numMedia" && d != "successful" && (y[d] = d3v3.scale.linear()
+			return d != "url" && d != "target" && d != "X1" && d != "X2" && d != "X3" && d != "X4" && d != "X5" && d != "X6" && d != "numWords" && d != "numMedia" && d != "successful" && (y[d] = d3v3.scale.linear()
 				.domain(d3v3.extent(articles, function (p) { return +p[d]; }))
 				.range([height, 0]));
 		}));
@@ -46,12 +46,13 @@ function parallel() {
 			.enter().append("path")
 			.attr("d", path)
 			.style("stroke", function (d) {
-				if (d['successful'] == "1") {
-					return "#708090";
+				if (d['target'] == "1") {
+					return "#F88017";
 				} else {
 					return "#008000"//GREEN
 				}
-			});
+			})
+
 
 		// Add a group element for each dimension.
 		var g = svg.selectAll(".dimension")
@@ -103,7 +104,43 @@ function parallel() {
 			.selectAll("rect")
 			.attr("x", -8)
 			.attr("width", 16);
+
+
+
+
+		g.append("rect")
+			.attr("id", "reset_rect_parallel")
+			.attr("x", width - 70)
+			.attr("y", 180)
+			.attr("width", 12)
+			.attr("height", 12)
+			.style("fill","red")
+			.on("click", function () {
+				var paths = d3.select("#foregroundpaths").selectAll("path").filter(function () {
+					return true;
+				}).style("opacity", 1)
+				.style("stroke", function (d) {
+					if (d['target'] == "1") {
+						return "#F88017";
+					} else {
+						return "#008000";
+					}
+				})
+					.attr("stroke-width", 1)
+					
+			});
+		
+
+		g.append("text")
+			.attr("id", "reset_text_parallel")
+			.attr("x", width - 75)
+			.attr("y", 200)
+			.attr("dy", ".65em")
+			.text("Reset")
+
 	});
+
+
 
 	function position(d) {
 		var v = dragging[d];
@@ -132,6 +169,21 @@ function parallel() {
 				return extents[i][0] <= d[p] && d[p] <= extents[i][1];
 			}) ? null : "none";
 		});
+	}
+
+	function reset_parallel() {
+
+		var paths = d3.select("#foregroundpaths").selectAll("path").filter(function () {
+			return true;
+		}).style("stroke", function (d) {
+			if (d['target'] == "1") {
+				return "#F88017";
+			} else {
+				return "#008000";
+			}
+		})
+			.attr("stroke-width", 1)
+			.style("opacity", 1)
 	}
 
 }

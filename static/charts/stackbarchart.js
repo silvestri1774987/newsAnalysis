@@ -25,6 +25,16 @@ function stackbarchart(t, div_present) {
     values = ["1", "2", "3", "4", "5", "6"]
     labels = ["LifeStyle", "Entertainment", "Business", "Social Media", "Tech", "World"]
   }
+  if (t=="numWords"){
+    svg.attr("width", 350).attr("height", 250).style("float", "left")
+    values = ["1","2","3","4"]
+    labels = ["<500","500-1000","1000-1500",">1500"]
+  }
+  if (t=="numMedia"){
+    svg.attr("width", 350).attr("height", 250).style("float", "left")
+    values = ["1","2","3","4"]
+    labels = ["<20","20-40","40-60",">60"]
+  }
   
 
   var margin = { top: 20, right: 20, bottom: 80, left: 40 },
@@ -62,7 +72,7 @@ function stackbarchart(t, div_present) {
           return flag_col
         }
         else{ 
-          flag_col = "#708090"
+          flag_col = "#F88017"
           return flag_col
         }
         //return z(d.key);
@@ -195,7 +205,7 @@ function stackbarchart(t, div_present) {
       })
       .on("click", to_barchart);
       
-    console.log(keys.slice().reverse())
+    //console.log(keys.slice().reverse())
     flag_col = "used"  
     legend.append("rect")
       .attr("x", width - 75)
@@ -204,7 +214,7 @@ function stackbarchart(t, div_present) {
       .attr("fill", function(d){
         //console.log("d "+d)
         if(d == 0) return "#008000"//green
-        else return "#708090"
+        else return "#F88017"
       })
 
     legend.append("text")
@@ -356,12 +366,12 @@ function stackbarchart(t, div_present) {
             return height - y(d[d3.select(selected_legend).attr("classification")]);
           })
           .attr("fill",function(d){
-            console.log(d3.select(selected_legend).attr("classification"))
+            //console.log(d3.select(selected_legend).attr("classification"))
             if(d3.select(selected_legend).attr("classification") == 0) return "#008000"
-            else return "#708090"
+            else return "#F88017"
           });//Devi cambiare qui
 
-          console.log("selected Leg"+selected_legend)
+          //console.log("selected Leg"+selected_legend)
         g.selectAll("rect").filter(function () {
           return this.getAttribute("id") != "is_sorting_rect"
         })
@@ -464,7 +474,7 @@ function stackbarchart(t, div_present) {
           .attr("height", 19)
           .attr("fill", function(d){
             if(d == 0) return "#008000"
-            else return "#708090"
+            else return "#F88017"
           })
 
         legend.append("text")
