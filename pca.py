@@ -12,7 +12,7 @@ def action():
         );
 
     from sklearn.preprocessing import StandardScaler
-    features = ['n_tokens_content','num_hrefs','num_imgs','num_videos','argument','day']
+    features = ['n_tokens_content','num_hrefs','num_imgs','num_videos','numWords','numMedia','shares']
 
     # Separating out the features
     x = data.loc[:, features].values
@@ -22,11 +22,11 @@ def action():
     x = StandardScaler().fit_transform(x)
 
     from sklearn.decomposition import PCA
-    pca = PCA(n_components=6)
+    pca = PCA(n_components=7)
 
     principalComponents = pca.fit_transform(x)
 
-    principalDf = pd.DataFrame(data = principalComponents, columns = ['X1', 'X2', 'X3', 'X4', 'X5', 'X6'])
+    principalDf = pd.DataFrame(data = principalComponents, columns = ['X1', 'X2', 'X3', 'X4', 'X5', 'X6','X7'])
     midDf=pd.concat([principalDf, data[["url"]]], axis=1)
     list_of_attributes=['n_tokens_content','num_hrefs','num_imgs','num_videos','argument','day','numWords','numMedia','shares']
     for elem in list_of_attributes:

@@ -155,7 +155,6 @@ function scatterplot_mean(rows) {
             return d
         })
         .on("click", function (t) {
-            draw_reset_rect(d3.select("svg"));
             d3.select("#scatterplot").selectAll("rect").attr("class", "unselected");
             d3.select(this).attr("class", "selected");
             d3.selectAll("[label]").each(function () {
@@ -180,7 +179,7 @@ function scatterplot_mean(rows) {
             d3.selectAll("circle").filter(function (d) { return d.target == t1; }).attr("class", "selected");
             d3.selectAll("circle").filter(function (d) { return d.target == !+t1; }).attr("class", "unselected");
         });
-
+        draw_reset_rect(d3.select("svg"));
 
     svg.append("g")
         .call(d3.brush().extent([[0, 0], [width, height]]).on("brush", brushed).on("end", brushended));
@@ -193,14 +192,14 @@ function scatterplot_mean(rows) {
             dx = s[1][0] - x0,
             dy = s[1][1] - y0;
         //console.log(s);
-        var i = 0    
+        var i = 0
         var sum = 0
         svg.selectAll('circle')
             .style("fill", function (d) {
-                if (x(d.X1) >= x0 && x(d.X1) <= x0 + dx && height - y(d.X2) >= y0 && height - y(d.X2) <= y0 + dy) { 
-                    i = i+1
+                if (x(d.X1) >= x0 && x(d.X1) <= x0 + dx && height - y(d.X2) >= y0 && height - y(d.X2) <= y0 + dy) {
+                    i = i + 1
                     sum = sum + parseInt(d.num_imgs)
-                    return "red"; 
+                    return "red";
                 }
 
                 else {
@@ -208,10 +207,10 @@ function scatterplot_mean(rows) {
                     if (d.target == 1) return "#F88017" //orange
                 }
             });
-            //console.log("i= "+i)
-            //console.log("sum= "+sum)
-            document.getElementById("Mean_Text").value = sum/i 
-            //console.log("Mean: "+ sum/i)
+        //console.log("i= "+i)
+        //console.log("sum= "+sum)
+        document.getElementById("Mean_Text").value = parseInt(sum / i)
+        //console.log("Mean: "+ sum/i)
     }
 
     function brushended() {
@@ -253,7 +252,7 @@ function scatterplot_mean(rows) {
             .attr("y", 68)
             .attr("width", 12)
             .attr("height", 12)
-            .attr("fill", flag_col)
+            .attr("fill", "red")
             .on("click", function (d) { re_draw_scatterplot_mean(rows) })
 
         g.append("text")

@@ -87,12 +87,14 @@ function scatterplot(rows) {
       var points = d3.select("#scatterplot").selectAll("circle").filter(function () {
         return this.getAttribute("fill") == "red"
       })
+      this.setAttribute("clicked", "false");
       for (i = 0; i < points["_groups"][0].length; i++) {//come back the points to the original
         //console.log(points["_groups"][0][i].getAttribute("target"))
         if (points["_groups"][0][i].getAttribute("target") == 0) flag_col = "#008000"
         else flag_col = "#F88017"
         points["_groups"][0][i].setAttribute("fill", flag_col);
         points["_groups"][0][i].setAttribute("r", "3");
+        
       }
       //draw_line(d);
       if (this.getAttribute("target") == 0) flag_col = "#008000"

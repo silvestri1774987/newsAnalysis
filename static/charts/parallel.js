@@ -24,7 +24,7 @@ function parallel() {
 		//console.log(articles[0])
 		x.domain(dimensions = d3v3.keys(articles[0]).filter(function (d) {
 
-			return d != "url" && d != "target" && d != "X1" && d != "X2" && d != "X3" && d != "X4" && d != "X5" && d != "X6" && d != "numWords" && d != "numMedia" && d != "successful" && (y[d] = d3v3.scale.linear()
+			return d != "url" && d != "target" && d != "X1" && d != "X2" && d != "X3" && d != "X4" && d != "X5" && d != "X6" && d != "X7" && d != "X8" && d != "X9" &&  d != "numWords" && d != "numMedia" && d != "successful" && (y[d] = d3v3.scale.linear()
 				.domain(d3v3.extent(articles, function (p) { return +p[d]; }))
 				.range([height, 0]));
 		}));
